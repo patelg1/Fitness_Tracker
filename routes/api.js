@@ -31,6 +31,7 @@ router.post('/api/workouts', (req, res) => {
 
 //Route for updating workout
 router.put('/api/workouts/:id', ({body, params}, res) => {
+    //const setDate = new Date().setDate(new Date().getDate()-10)
     Workout.findByIdAndUpdate(
         {_id: params.id},
         {$push: {exercises: body}},
@@ -52,7 +53,7 @@ router.get('/api/workouts/range', (req, res) => {
             }
         }
     ])
-    // .sort({_id: -1})
+    .sort({day: -1})
     .limit(7)
     .then(dbWorkout => {
         res.json(dbWorkout);
